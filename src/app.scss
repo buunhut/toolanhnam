@@ -1,0 +1,62 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+}
+
+#container {
+    padding: 20px;
+
+    form {
+        textarea {
+            width: 100%;
+            height: 400px;
+            padding: 10px
+        }
+    }
+
+    .inputItem {
+        height: 30px;
+        margin: 10px;
+
+        input {
+            width: 100%;
+            height: 30px;
+            padding: 5px;
+        }
+    }
+
+    .content {
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+
+            thead {
+                tr {
+                    th {
+                        padding: 10px;
+                        border: 1px solid black
+                    }
+                }
+            }
+
+            tbody {
+                tr {
+                    td {
+                        padding: 10px;
+
+                        border: 1px solid black;
+
+                        a {
+                            text-decoration: none;
+                            color: black;
+                            cursor: pointer;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
