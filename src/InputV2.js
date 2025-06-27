@@ -35,6 +35,7 @@ const InputV2 = () => {
         line = line.trim();
         if (!line) return null;
 
+        // Tìm SĐT
         const sdtMatch = line.match(/\b\d{3,4}\s?\d{6,7}\b/);
         if (!sdtMatch) {
           console.warn(`❌ Không tìm thấy SĐT ở dòng ${index + 1}: ${line}`);
@@ -46,30 +47,31 @@ const InputV2 = () => {
         let ten = line.slice(0, indexSdt).trim();
         ten = toTitleCase(ten);
 
-        const afterSdt = line
-          .slice(indexSdt + sdtMatch[0].length)
-          .replace(/^\s+/, "");
+        const afterSdt = line.slice(indexSdt + sdtMatch[0].length).trim();
 
+        // Tìm tài chính
         const tcMatch = afterSdt.match(
           /(Đầu tư\s*)?(<|>)\s*\d+([\s-]*\d+)?\s*tỷ/i
         );
         const taiChinh = tcMatch ? tcMatch[0].trim() : "";
 
-        let yeuCau = "";
-        let tenDuong = "";
-        let ghiChu = "";
-
-        if (taiChinh) {
-          const indexTc = afterSdt.indexOf(taiChinh);
-          const afterTc = afterSdt
-            .slice(indexTc + taiChinh.length)
-            .replace(/^[,\s]+/, "");
-          const parts = afterTc.split("|").map((s) => s.trim());
-
-          yeuCau = parts[0] || "";
-          tenDuong = parts.length > 1 ? toTitleCase(parts[1]) : "";
-          ghiChu = parts.length > 2 ? parts.slice(2).join(" | ") : "";
+        let afterTc = afterSdt;
+        if (tcMatch) {
+          afterTc = afterSdt.replace(tcMatch[0], "").replace(/^[,\s\t|]+/, "");
         }
+
+        // Xử lý phần còn lại
+        let parts = [];
+
+        if (afterTc.includes("\t")) {
+          parts = afterTc.split("\t").map((s) => s.trim());
+        } else if (afterTc.includes("|")) {
+          parts = afterTc.split("|").map((s) => s.trim());
+        }
+
+        const yeuCau = parts[0] || "";
+        const tenDuong = parts[1] ? toTitleCase(parts[1]) : "";
+        const ghiChu = parts.length > 2 ? parts.slice(2).join(" | ") : "";
 
         const numberMatch = taiChinh.match(/(\d+)(\s*-\s*(\d+))?/i);
         const soTien = numberMatch ? parseInt(numberMatch[1]) : Infinity;
@@ -86,6 +88,7 @@ const InputV2 = () => {
       })
       .filter(Boolean);
 
+    // Sắp xếp theo tài chính giảm dần
     data.sort((a, b) => b.soTien - a.soTien);
 
     return data.map(({ soTien, ...rest }) => rest);
