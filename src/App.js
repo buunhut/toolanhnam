@@ -26,6 +26,12 @@ const App = () => {
     return /công\s+ty/i.test(str);
   };
 
+  const toTitleCase = (str) =>
+    str.replace(
+      /\w\S*/g,
+      (txt) => txt.charAt(0).toUpperCase() + txt.slice(1).toLowerCase()
+    );
+
   const tachDuLieu = (lines) => {
     const data = lines
       .split("\n")
@@ -42,7 +48,8 @@ const App = () => {
 
         const sdt = sdtMatch[0].replace(/\s+/, " ").trim();
         const indexSdt = line.indexOf(sdtMatch[0]);
-        const ten = line.slice(0, indexSdt).trim();
+        let ten = line.slice(0, indexSdt).trim();
+        ten = toTitleCase(ten); // Viết hoa chữ cái đầu mỗi từ
 
         const afterSdt = line
           .slice(indexSdt + sdtMatch[0].length)
