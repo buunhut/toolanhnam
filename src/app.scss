@@ -5,6 +5,12 @@
 
 }
 
+body {
+    &::-webkit-scrollbar {
+        display: none;
+    }
+}
+
 #topMenu {
     ul {
         display: flex;
@@ -37,10 +43,14 @@
 #container {
     padding: 20px;
 
+
     form {
+        position: sticky;
+        top: 0;
+
         textarea {
             width: 100%;
-            height: 400px;
+            height: 260px;
             padding: 10px;
             font-size: 16px;
             resize: none;
@@ -69,10 +79,14 @@
 
 
     .content {
+        height: calc(100vh - 430px);
+        overflow: scroll;
+
+        padding: 10px 0;
+
         table {
             width: 100%;
             border-collapse: collapse;
-            margin-top: 10px;
 
             thead {
                 tr {

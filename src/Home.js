@@ -4,10 +4,13 @@ import { Outlet } from "react-router-dom";
 
 const Home = () => {
   return (
-    <div>
+    <>
       <TopMenu />
-      <Outlet />
-    </div>
+
+      <div id="container">
+        <Outlet />
+      </div>
+    </>
   );
 };
 

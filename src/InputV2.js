@@ -174,7 +174,7 @@ const InputV2 = () => {
   const filteredData = getFilteredData();
 
   return (
-    <div id="container">
+    <>
       <form>
         <textarea
           value={text}
@@ -249,7 +249,7 @@ const InputV2 = () => {
           <p>Không tìm thấy kết quả phù hợp.</p>
         )}
       </div>
-    </div>
+    </>
   );
 };
 
