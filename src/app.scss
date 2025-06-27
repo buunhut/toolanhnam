@@ -5,6 +5,35 @@
 
 }
 
+#topMenu {
+    ul {
+        display: flex;
+        gap: 30px;
+        justify-content: center;
+        align-items: center;
+        height: 40px;
+        background-color: rgb(48, 48, 48);
+
+        li {
+            list-style: none;
+
+            a {
+                color: white;
+                font-weight: bold;
+                text-decoration: none;
+                font-size: 14px;
+                transition: all .3s;
+
+                &.active {
+                    color: red;
+                    font-size: 28px;
+
+                }
+            }
+        }
+    }
+}
+
 #container {
     padding: 20px;
 
@@ -14,6 +43,7 @@
             height: 400px;
             padding: 10px;
             font-size: 16px;
+            resize: none;
 
         }
     }
